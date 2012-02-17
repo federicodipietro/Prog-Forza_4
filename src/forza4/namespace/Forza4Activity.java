@@ -69,18 +69,25 @@ public class Forza4Activity extends Activity {
         				touchx=(int)event.getX();
             			//Log.d("touchx", Integer.toString(touchx));
             			col=InputMatr.getCol(touchx, raggio);
+            			
+            			if(matr[0][col]==0)
+            			{
+            				matr=InputMatr.inputMatr(matr,col,gio);
+                			Tock.start();
+            				gio=!gio;
+            				PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
+            				win=CheckWin.checkWin(matr, Forza4Activity.this,win);
+            			}
+            				
             			//Log.d("Colonna sel.", Integer.toString(col));
-            			matr=InputMatr.inputMatr(matr,col,gio);
-            			gio=!gio;
             			
-            			Tock.start();
             			
-               			PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
+               			
                			
                			//tabella=new Griglia(Forza4Activity.this, winX, winY);
                			//griglia.addView(tabella);
                			
-               			win=CheckWin.checkWin(matr, Forza4Activity.this,win);
+               			
                			if(win)vittoria.start();
                			//Tock.stop();
         			}

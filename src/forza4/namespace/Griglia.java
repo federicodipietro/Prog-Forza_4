@@ -12,14 +12,14 @@ public class Griglia extends View{
 	
 	public Griglia(Context context,int newWidth,int newHeigth) {
 		super(context);
-		int temp=1;
-		if(newWidth<newHeigth)temp=newWidth;
-		else if(newWidth>=newHeigth)temp=newHeigth;
+		//int temp=1;
+		//if(newWidth<newHeigth)temp=newWidth;
+		//else if(newWidth>=newHeigth)temp=newHeigth;
 		
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inJustDecodeBounds = true;
 		tabella=Pedina.getResizeBitmap(BitmapFactory.decodeResource(context.getResources(),
-				R.drawable.griglia),temp , temp);
+				R.drawable.grigliav2),newWidth , newHeigth);
 	}
 
 	@Override

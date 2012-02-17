@@ -5,11 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.view.View;
 
 public class Pedina extends View{
@@ -27,10 +23,10 @@ public class Pedina extends View{
 		y=POSy;
 		//palla= new ShapeDrawable(new OvalShape());
 		if(gio==1)
-			img = BitmapFactory.decodeResource(context.getResources(),R.drawable.giallo);
+			img = BitmapFactory.decodeResource(context.getResources(),R.drawable.giallov2);
 			//palla.getPaint().setColor(Color.GREEN);
 		else if(gio==2)
-			img = BitmapFactory.decodeResource(context.getResources(), R.drawable.rosso);
+			img = BitmapFactory.decodeResource(context.getResources(), R.drawable.rossov2);
 			//palla.getPaint().setColor(Color.YELLOW);
 		//palla.setBounds(POSx, POSy, POSx+raggio, POSy+raggio);
 		ped=getResizeBitmap(img, raggio, raggio);

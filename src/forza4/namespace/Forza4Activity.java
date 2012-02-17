@@ -45,8 +45,8 @@ public class Forza4Activity extends Activity {
         winY = getWindowManager().getDefaultDisplay().getHeight();
         
         //****disegna tabella*********
-        //tabella=new Griglia(Forza4Activity.this, winX, winY);
-        //griglia.addView(tabella);
+        tabella=new Griglia(Forza4Activity.this, winX, winY);
+        griglia.addView(tabella);
          //**************************** 
         
         

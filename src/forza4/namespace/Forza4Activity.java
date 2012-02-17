@@ -31,7 +31,7 @@ public class Forza4Activity extends Activity {
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        griglia = (FrameLayout)findViewById(R.id.frameLayout2);
+        griglia = (FrameLayout)findViewById(R.id.frameLayout1);
         
         //***********souni****************
         Tock=MediaPlayer.create(Forza4Activity.this, R.raw.tok);
@@ -39,10 +39,15 @@ public class Forza4Activity extends Activity {
        // lancio=MediaPlayer.create(Forza4Activity.this, R.raw.lancio);
         //*********************************
        
+        
+        
         winX = getWindowManager().getDefaultDisplay().getWidth();
         winY = getWindowManager().getDefaultDisplay().getHeight();
         
-        
+        //****disegna tabella*********
+        //tabella=new Griglia(Forza4Activity.this, winX, winY);
+        //griglia.addView(tabella);
+         //**************************** 
         
         
         if(winX/7>winY/6)
@@ -71,6 +76,10 @@ public class Forza4Activity extends Activity {
             			Tock.start();
             			
                			PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
+               			
+               			//tabella=new Griglia(Forza4Activity.this, winX, winY);
+               			//griglia.addView(tabella);
+               			
                			win=CheckWin.checkWin(matr, Forza4Activity.this,win);
                			if(win)vittoria.start();
                			//Tock.stop();
@@ -85,11 +94,7 @@ public class Forza4Activity extends Activity {
    			}
        });
         
-        //****disegna tabella*********
-       // tabella=new Griglia(Forza4Activity.this, winX, winY);
-		//griglia.addView(tabella);
-		
-        //**************************** 
+       
        
 	}
 	

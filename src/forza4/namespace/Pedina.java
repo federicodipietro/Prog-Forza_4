@@ -10,37 +10,29 @@ import android.view.View;
 
 public class Pedina extends View{
 
-	//private ShapeDrawable palla;
-	//private Bitmap img=null;
 	private Bitmap ped=null;
-	private int x,y;
-	public Pedina(Context context,int POSx,int POSy, int raggio, int gio) {
+	private float x,y;
+	public Pedina(Context context,float POSx,float POSy, float raggio, int gio) {
 		super(context);
 		Bitmap img=null;
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inJustDecodeBounds = true;
 		x=POSx;
 		y=POSy;
-		//palla= new ShapeDrawable(new OvalShape());
 		if(gio==1)
 			img = BitmapFactory.decodeResource(context.getResources(),R.drawable.giallov2);
-			//palla.getPaint().setColor(Color.GREEN);
 		else if(gio==2)
 			img = BitmapFactory.decodeResource(context.getResources(), R.drawable.rossov2);
-			//palla.getPaint().setColor(Color.YELLOW);
-		//palla.setBounds(POSx, POSy, POSx+raggio, POSy+raggio);
 		ped=getResizeBitmap(img, raggio, raggio);
 		
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		//palla.draw(canvas);
 		canvas.drawBitmap(ped,x,y,null);
 	}
 	//per ridimensionamento bitmap pedina
-	public static Bitmap getResizeBitmap(Bitmap img,int newHeigth,int newWidth){
+	public static Bitmap getResizeBitmap(Bitmap img,float newHeigth,float newWidth){
 		int width = img.getWidth();
 		int heigth = img.getHeight();
 		float scaleWidth = ((float)newWidth/width);
@@ -50,7 +42,7 @@ public class Pedina extends View{
 		//resize bitmap
 		matrix.postScale(scaleWidth, scaleHeigth);
 		//ricrea la nuova bitmap
-		Bitmap newBitmap = Bitmap.createBitmap(img,0, 0,width,heigth,matrix,false);
+		Bitmap newBitmap = Bitmap.createBitmap(img,0, 0,width,heigth,matrix,true);
 		return newBitmap;
 	}
 }

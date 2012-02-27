@@ -15,7 +15,8 @@ public class Forza4Activity extends Activity {
     /** Called when the activity is first created. */
 	Pedina ped;
 	Griglia tabella;
-	int winX, winY, y, col, touchx, raggio, diam, offsetX, offsetY, div;
+	int winX, winY, y, col, touchx, step;
+	float divx, divy, diam, offsetX, offsetY;
 	int matr[][]=new int [6][7];
 	FrameLayout griglia;
 	boolean gio=true;
@@ -41,25 +42,34 @@ public class Forza4Activity extends Activity {
         winY = getWindowManager().getDefaultDisplay().getHeight();
         Log.d("dimensioni display (xy)", Integer.toString(winX)+"  "+Integer.toString(winY));
         if(winX/7>winY/6)
-        	raggio=(int)winY/6;
+        	step=(int)winY/6;
         else
-        	raggio=winX/7;
+        	step=(int)winX/7;
         
         //****disegna tabella*********
-        tabella=new Griglia(Forza4Activity.this, raggio*6, raggio*7);
+        tabella=new Griglia(Forza4Activity.this, step*6, step*7);
         griglia.addView(tabella);
          //**************************** 
-        Double temp =0.760869565*raggio;
-        diam=temp.intValue()+1;
         
-        temp=0.321256038*raggio;
-        offsetX=temp.intValue()+1;
+        //rapporto tra largh pedina e larghezza griglia*7
+        Double temp =0.79277108433733*step;
+        diam=temp.floatValue();
         
-        temp=0.319327731*raggio;
-        offsetY=temp.intValue()+1;
+        //rapporto distanza bordo e primo buco e largh griglia*7
+        temp=0.320448192771084*step;
+        offsetX=temp.floatValue();
         
-        temp=0.169082125*raggio;
-        div = temp.intValue();
+        //rapporto distanza bordo e primo buco e altezza griglia*6
+        temp=0.30167597765363*step;
+        offsetY=temp.floatValue();
+        
+        //rapporto tra distanza tra 2 buchi e largh griglia
+        temp=0.13493975903615*step;
+        divx = temp.floatValue();
+        
+        //rapporto tra distanza tra 2 buchi e altezza griglia
+        temp=0.13128491620112*step;
+        divy = temp.floatValue();
         
         //Log.d("raggio", Integer.toString(raggio));
         griglia.setOnTouchListener(new OnTouchListener()
@@ -74,29 +84,20 @@ public class Forza4Activity extends Activity {
         			if(!win)
         			{
         				touchx=(int)event.getX();
-            			//Log.d("touchx", Integer.toString(touchx));
-            			col=InputMatr.getCol(touchx, raggio);
+            			col=InputMatr.getCol(touchx, step);
             			
             			if(matr[0][col]==0)
             			{
             				matr=InputMatr.inputMatr(matr,col,gio);
                 			Tock.start();
             				gio=!gio;
-            				PrintG.printG(matr, offsetX, offsetY, diam, div, Forza4Activity.this, griglia);
+            				griglia.removeAllViews();
+            				PrintG.printG(matr, offsetX, offsetY, diam, divx, divy, Forza4Activity.this, griglia);
+            				griglia.addView(tabella);
             				win=CheckWin.checkWin(matr, Forza4Activity.this,win);
             			}
-            				
-            			//Log.d("Colonna sel.", Integer.toString(col));
-            			
-            			
-               			
-               			
-               			//tabella=new Griglia(Forza4Activity.this, winX, winY);
-               			//griglia.addView(tabella);
-               			
                			
                			if(win)vittoria.start();
-               			//Tock.stop();
         			}
         			else
         				Toast.makeText(Forza4Activity.this, "Hanno vinto", Toast.LENGTH_SHORT).show();

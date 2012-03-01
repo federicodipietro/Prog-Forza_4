@@ -22,13 +22,16 @@ public final class R {
     public static final class id {
         public static final int buttonExit=0x7f060003;
         public static final int buttonStart=0x7f060002;
-        public static final int frameLayout1=0x7f060004;
+        public static final int frameLayout1=0x7f060006;
         public static final int linearLayout1=0x7f060000;
+        public static final int okbutton=0x7f060005;
         public static final int titolo=0x7f060001;
+        public static final int username=0x7f060004;
     }
     public static final class layout {
         public static final int home=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int login=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class raw {
         public static final int lancio=0x7f040000;

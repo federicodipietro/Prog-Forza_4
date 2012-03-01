@@ -20,7 +20,7 @@ public class HomeActivity extends Activity
 		{
 			public void onClick(View arg0)
 			{
-				Intent intent = new Intent(HomeActivity.this, Forza4Activity.class); // creare la schermata di login e avviarla con l'intent
+				Intent intent = new Intent(HomeActivity.this, Login.class); // creare la schermata di login e avviarla con l'intent
 				startActivity(intent);
 			}
 		});
@@ -35,5 +35,5 @@ public class HomeActivity extends Activity
 		});
 		
 	}
-	
+
 }

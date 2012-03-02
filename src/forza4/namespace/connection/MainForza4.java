@@ -155,7 +155,7 @@ public class MainForza4 extends Activity implements MessageReceiver{
 			};
 			//************************************************************************************************
 				
-			if (statoCorrente==Stato.USER_SELECTING){
+			//if (statoCorrente==Stato.USER_SELECTING){
 				griglia.setOnTouchListener(new OnTouchListener()
 				{
 					public boolean onTouch(View v, MotionEvent event)
@@ -199,8 +199,8 @@ public class MainForza4 extends Activity implements MessageReceiver{
 	        		return true;
 	   			}
 			});
-		}else
-			Toast.makeText(MainForza4.this,"Attendi", Toast.LENGTH_SHORT).show();
+		//}else
+			//Toast.makeText(MainForza4.this,"Attendi", Toast.LENGTH_SHORT).show();
 	}
 	
 	
@@ -265,8 +265,9 @@ public class MainForza4 extends Activity implements MessageReceiver{
 				Message osmsg = handler.obtainMessage(MainForza4.SHOW_TOAST);
 				Bundle b = new Bundle();
 				//controlla i decode
-				matr=InputMatr.inputMatr(matr,Integer.decode(selectedCol),gio);
+				matr=InputMatr.inputMatr(matr,Integer.parseInt(selectedCol),!gio);
     			Tock.start();
+    			griglia =(FrameLayout)findViewById(R.id.frameLayout1);
     			griglia.removeAllViews();
 				PrintG.printG(matr, offsetX, offsetY, diam, divx, divy, MainForza4.this, griglia);
 				griglia.addView(tabella);

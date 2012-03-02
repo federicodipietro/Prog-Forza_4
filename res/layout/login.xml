@@ -16,6 +16,20 @@
              android:layout_marginRight="20dp"
        		 android:layout_marginBottom="20dp"/>
 
+         <EditText
+             android:id="@+id/username2"
+             android:layout_width="150dp"
+             android:hint="avversario"
+             android:inputType="textPersonName"
+             android:gravity="center_horizontal"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20dp"
+             android:layout_marginLeft="20dp"
+             android:layout_marginRight="20dp"
+       		 android:layout_marginBottom="20dp" >
+
+         </EditText>
+
          <Button
              android:id="@+id/okbutton"
              android:layout_width="100dp"

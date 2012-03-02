@@ -104,8 +104,9 @@ public class MainForza4 extends Activity implements MessageReceiver{
 		
         //***************************da passare da login*****************
         String nomeMio,nomeAvversario;
-		nomeMio= getIntent().getExtras().getString("TextUtent");
-		nomeAvversario= getIntent().getExtras().getString("TextAvvers");
+		nomeMio= getIntent().getExtras().getString("user1");
+		nomeAvversario= getIntent().getExtras().getString("user2");
+		Log.w(nomeMio, nomeAvversario);
 		//^^^^^^^*******************************************************************
 		
 		//*******************CONNESSIONE*****************************************************
@@ -117,24 +118,27 @@ public class MainForza4 extends Activity implements MessageReceiver{
 		public void run() {
 				
 			if (statoCorrente==Stato.WAIT_FOR_START_ACK){
-				connection.send("START");	
+				connection.send("START");
+				Log.d("Stato", "inviato START");
 			}else{
 				Log.d("ATTENZIONE","Sending START but the state is "+ statoCorrente);
 				}
 			}
 		};
 		//decido chi comincia
-		if (nomeAvversario.hashCode()<nomeMio.hashCode()){
+		if (nomeAvversario.hashCode()<=nomeMio.hashCode()){
 		//inizio per primo
 			gio=true;
 			Toast.makeText(MainForza4.this, "Sei giocatore 1", Toast.LENGTH_SHORT).show();
 			timer.schedule(sendStart, 1000L,5000L);
 			statoCorrente=Stato.WAIT_FOR_START_ACK;
+			Log.d("Stato", statoCorrente.toString());
 		}else{
 		//inizia avversario e io aspetto il pacchetto
 			gio=false;
 			Toast.makeText(MainForza4.this, "Sei giocatore 2", Toast.LENGTH_SHORT).show();
 			statoCorrente=Stato.WAIT_FOR_START;
+			Log.d("Stato", statoCorrente.toString());
 		}
 		//creo handler 
 		handler = new Handler(){
@@ -174,7 +178,7 @@ public class MainForza4 extends Activity implements MessageReceiver{
 	                			//gio=!gio;
 	            				
 	            				statoCorrente=Stato.WAIT_FOR_SELECT;
-	            				
+	            				Log.d("Stato", statoCorrente.toString());
 	            				//invia colonna selezionata*****
 	            				connection.send("SELECTED:"+Integer.toString(col));
 	            				//*******

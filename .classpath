@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="/home/portatile/Documenti/libr es goico/asmack-2010.05.07.jar"/>
+	<classpathentry kind="lib" path="asmack-2010.05.07.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

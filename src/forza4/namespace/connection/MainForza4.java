@@ -18,8 +18,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 public class MainForza4 extends Activity implements MessageReceiver{
 
 	private static final int SHOW_TOAST = 0;
+	private static final int REFRESH_VIEW = 1;
 	ConnectionManager connection;
 	
 	enum Stato{
@@ -53,12 +56,10 @@ public class MainForza4 extends Activity implements MessageReceiver{
 	boolean win=false;
 	//per suoni
 	MediaPlayer Tock,lancio,vittoria;
-	
-	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedinstance) {
+		super.onCreate(savedinstance);
         setContentView(R.layout.main);
         
         griglia = (FrameLayout)findViewById(R.id.frameLayout1);
@@ -148,6 +149,14 @@ public class MainForza4 extends Activity implements MessageReceiver{
 				case MainForza4.SHOW_TOAST:
 					Toast.makeText(MainForza4.this, msg.getData().getString("toast"), Toast.LENGTH_LONG).show();
 					break;
+				case MainForza4.REFRESH_VIEW:
+				{
+					Tock.start();
+	    			griglia.removeAllViews();
+					PrintG.printG(matr, offsetX, offsetY, diam, divx, divy, MainForza4.this, griglia);
+					griglia.addView(tabella);
+					win=CheckWin.checkWin(matr, MainForza4.this,win);
+				}
 				default:
 					super.handleMessage(msg);
 					}
@@ -186,6 +195,9 @@ public class MainForza4 extends Activity implements MessageReceiver{
 	            				griglia.removeAllViews();
 	            				PrintG.printG(matr, offsetX, offsetY, diam, divx, divy, MainForza4.this, griglia);
 	            				griglia.addView(tabella);
+	            				//griglia.refreshDrawableState();
+	            				
+	            				//MainForza4.this.onResume();////////////////////gfjgfdjhfdhgdjhgfdjytdfdyhtrdfdfdd
 	            				win=CheckWin.checkWin(matr, MainForza4.this,win);
 	            			}
 	               			
@@ -204,22 +216,7 @@ public class MainForza4 extends Activity implements MessageReceiver{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -264,18 +261,15 @@ public class MainForza4 extends Activity implements MessageReceiver{
 				selectedCol=msg.split(":")[1];
 				Message osmsg = handler.obtainMessage(MainForza4.SHOW_TOAST);
 				Bundle b = new Bundle();
-				//controlla i decode
+				
 				matr=InputMatr.inputMatr(matr,Integer.parseInt(selectedCol),!gio);
-    			Tock.start();
-    			griglia =(FrameLayout)findViewById(R.id.frameLayout1);
-    			griglia.removeAllViews();
-				PrintG.printG(matr, offsetX, offsetY, diam, divx, divy, MainForza4.this, griglia);
-				griglia.addView(tabella);
-				win=CheckWin.checkWin(matr, MainForza4.this,win);
     			
+    			Message mesView=handler.obtainMessage(MainForza4.REFRESH_VIEW);
+				
 				b.putString("toast", "Tocca a te");
 				osmsg.setData(b);
 				handler.sendMessage(osmsg);
+				handler.sendMessage(mesView);
 				statoCorrente=Stato.USER_SELECTING;
 			}else{
 				Log.e("ATTENZIONE","Ricevuto SELECTED ma lo stato e' :"+statoCorrente);
